@@ -19,4 +19,11 @@ Assignment.virtual('', {
   justOne: true
 })
 
+Assignment.virtual('', {
+  localField: 'subjectId',
+  ref: 'Subject',
+  foreignField: '_id',
+  justOne: true
+})
+
 export default Assignment

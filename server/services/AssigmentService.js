@@ -4,8 +4,8 @@ import { BadRequest } from '../utils/Errors'
 class AssignmentsService {
   async getAll(query = {}) {
     const assignments = await dbContext.Assignments.find(query)
-      .populate('studentId', 'name') // -email. -id, name email
-      .populate('subjectId', 'name')
+      .populate('student', 'name') // -email. -id, name email
+      .populate('subjectId', 'name') // got rid of studentId => student because assigment model change
     return assignments
   }
 
@@ -39,4 +39,4 @@ class AssignmentsService {
   }
 }
 
-export const assignmentssService = new AssignmentsService()
+export const assignmentsService = new AssignmentsService()
