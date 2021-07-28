@@ -1,4 +1,7 @@
+import Assignment from '../models/Assigment'
+import { assignmentsService } from '../services/AssigmentService'
 import { studentsService } from '../services/StudentsService'
+import { subjectsService } from '../services/SubjectsService'
 import BaseController from '../utils/BaseController'
 
 export class StudentsController extends BaseController {
@@ -7,6 +10,8 @@ export class StudentsController extends BaseController {
     this.router
       .get('', this.getAll)
       .get('/:id', this.getById)
+      .get('/:id/assigment', this.getAssignments)
+      .get('/:id/subjects', this.getSubjects)
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.remove)
@@ -27,6 +32,24 @@ export class StudentsController extends BaseController {
       res.send(student)
     } catch (error) {
       next(error)
+    }
+  }
+
+  aync getAssignments(req, res, next) {
+    try {
+      const assignments = assignmentsService.getAll({studentId: req.params.id})
+      res.send(assignments)
+    } catch (error) {
+
+    }
+  }
+
+  async getSubjects(req, res, next) {
+    try {
+      const subjects = subjectsService.getAll({studentId: req.params.id})
+      res.send(subjects)
+    } catch (error) {
+
     }
   }
 
