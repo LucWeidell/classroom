@@ -12,6 +12,11 @@ const Assignment = new Schema(
   { timestamps: true, toJSON: { virtuals: true } }
 )
 
-Assigment.virtual({})
+Assignment.virtual('', {
+  localField: 'studentId',
+  ref: 'Student',
+  foreignField: '_id',
+  justOne: true
+})
 
 export default Assignment
