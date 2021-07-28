@@ -7,6 +7,19 @@ class StudentsSubjectsService {
     return studentsSubjects
   }
 
+  async getAllByStudent(studentId) {
+    const studentSubjects = await dbContext.StudentsSubjects.find({ studentId })
+      .populate('subject')
+    const subjects = studentSubjects.map(ss => {
+      return {
+        subject: ss.subject,
+        studentSubjectsId: ss.id,
+        grade: ss.grade
+      }
+    })
+    return subjects
+  }
+
   async getById(id) {
     const studentsSubjects = await dbContext.StudentsSubjects.findById(id)
     if (!studentsSubjects) {

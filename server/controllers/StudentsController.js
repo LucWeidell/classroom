@@ -35,21 +35,21 @@ export class StudentsController extends BaseController {
     }
   }
 
-  aync getAssignments(req, res, next) {
+  async getAssignments(req, res, next) {
     try {
-      const assignments = assignmentsService.getAll({studentId: req.params.id})
+      const assignments = await assignmentsService.getAll({ studentId: req.params.id })
       res.send(assignments)
     } catch (error) {
-
+      next(error)
     }
   }
 
   async getSubjects(req, res, next) {
     try {
-      const subjects = subjectsService.getAll({studentId: req.params.id})
+      const subjects = subjectsService.getAll({ studentId: req.params.id })
       res.send(subjects)
     } catch (error) {
-
+      next(error)
     }
   }
 
